@@ -19,9 +19,9 @@
    19  sudo ssh-keygen -lf /etc/ssh/ssh_host_ecdsa_key.pub
    20  mkdir -p ~/.ssh
    21  chmod 700 ~/.ssh
-   22  printf '%s\n' 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPwA4jQJ45qVkz01O4/UeWSR27DveaCGpGhCGYHfjg3u codex-redos-lab-2026' >> ~/.ssh/authorized_keys
+   22  printf '%s\n' 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPwA4jQJ45qVkz01O4/UeWSR27DveaCGpGhCGYHfjg3u [REDACTED-KEY-COMMENT]' >> ~/.ssh/authorized_keys
    23  chmod 600 ~/.ssh/authorized_keys
    24  sudo restorecon -RFv ~/.ssh
-   25  printf '%s\n' 'labadmin ALL=(ALL) NOPASSWD: ALL' | sudo tee /etc/sudoers.d/labadmin-codex
-   26  sudo chmod 0440 /etc/sudoers.d/labadmin-codex
+   25  printf '%s\n' 'labadmin ALL=(ALL) NOPASSWD: ALL' | sudo tee /etc/sudoers.d/[REDACTED-TEMPORARY-RULE]
+   26  sudo chmod 0440 /etc/sudoers.d/[REDACTED-TEMPORARY-RULE]
    27  sudo visudo -c
