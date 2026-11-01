@@ -1,0 +1,131 @@
+++ lsblk -dnro SIZE /dev/sdb
++ test 8G = 8G
+++ lsblk -nro TYPE /dev/sdb
+++ wc -l
++ test 1 -eq 1
+++ sudo wipefs -n /dev/sdb
++ test -z ''
+++ findmnt -no SOURCE /
++ test /dev/sda4 = /dev/sda4
++ sudo parted -s /dev/sdb mklabel gpt
++ sudo parted -s /dev/sdb mkpart primary ext4 1MiB 100%
++ sudo partprobe /dev/sdb
++ sudo udevadm settle
++ sudo mkfs.ext4 -L MEPHI_WEB /dev/sdb1
+mke2fs 1.46.3 (27-Jul-2021)
+Creating filesystem with 2096640 4k blocks and 524288 inodes
+Filesystem UUID: d02d8044-7ced-403a-91be-5363cff07ea1
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632
+
+Allocating group tables:  0/64     done                            
+Writing inode tables:  0/64     done                            
+Creating journal (16384 blocks): done
+Writing superblocks and filesystem accounting information:  0/64     done
+
++ sudo mkdir -p /mephi-web
++ sudo cp -a /etc/fstab /root/mephi-backups/fstab.before
++ printf '%s\n' 'LABEL=MEPHI_WEB /mephi-web ext4 defaults 0 2'
++ sudo tee -a /etc/fstab
+LABEL=MEPHI_WEB /mephi-web ext4 defaults 0 2
++ sudo systemctl daemon-reload
++ sudo findmnt --verify --verbose
+/
+   [ ] target exists
+   [ ] UUID=bccc338e-9377-4ae2-bd81-db5f3c87f222 translated to /dev/sda4
+   [ ] source /dev/sda4 exists
+   [ ] FS type is ext4
+/boot
+   [ ] target exists
+   [ ] UUID=af6a1b7d-371a-448b-bc70-fc84b3c32b07 translated to /dev/sda2
+   [ ] source /dev/sda2 exists
+   [ ] FS type is ext4
+none
+   [ ] UUID=901dbe90-5cab-41e3-94fa-dbfd43febcd6 translated to /dev/sda3
+   [ ] source /dev/sda3 exists
+   [ ] FS type is swap
+/mephi-web
+   [ ] target exists
+   [ ] LABEL=MEPHI_WEB translated to /dev/sdb1
+   [ ] source /dev/sdb1 exists
+   [ ] FS type is ext4
+Success, no errors or warnings detected
++ sudo mount /mephi-web
++ findmnt /mephi-web
+TARGET     SOURCE    FSTYPE OPTIONS
+/mephi-web /dev/sdb1 ext4   rw,relatime,seclabel
++ lsblk -f
+NAME   FSTYPE  FSVER            LABEL           UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+sda                                                                                                 
+|-sda1                                                                                              
+|-sda2 ext4    1.0                              af6a1b7d-371a-448b-bc70-fc84b3c32b07  672.9M    24% /boot
+|-sda3 swap    1                                901dbe90-5cab-41e3-94fa-dbfd43febcd6                [SWAP]
+`-sda4 ext4    1.0                              bccc338e-9377-4ae2-bd81-db5f3c87f222   21.6G    32% /
+sdb                                                                                                 
+`-sdb1 ext4    1.0              MEPHI_WEB       d02d8044-7ced-403a-91be-5363cff07ea1    7.4G     0% /mephi-web
+sr0    iso9660 Joliet Extension VBox_GAs_7.0.10 2023-07-12-19-24-46-08                     0   100% /run/media/labadmin/VBox_GAs_7.0.10
+zram0                                                                                               [SWAP]
++ for account in user1 user2 user3 curator1 curator2 5501 5502 5503
++ getent passwd user1
++ for account in user1 user2 user3 curator1 curator2 5501 5502 5503
++ getent passwd user2
++ for account in user1 user2 user3 curator1 curator2 5501 5502 5503
++ getent passwd user3
++ for account in user1 user2 user3 curator1 curator2 5501 5502 5503
++ getent passwd curator1
++ for account in user1 user2 user3 curator1 curator2 5501 5502 5503
++ getent passwd curator2
++ for account in user1 user2 user3 curator1 curator2 5501 5502 5503
++ getent passwd 5501
++ for account in user1 user2 user3 curator1 curator2 5501 5502 5503
++ getent passwd 5502
++ for account in user1 user2 user3 curator1 curator2 5501 5502 5503
++ getent passwd 5503
++ for grp in developers curators 4444
++ getent group developers
++ for grp in developers curators 4444
++ getent group curators
++ for grp in developers curators 4444
++ getent group 4444
++ sudo groupadd developers
++ sudo groupadd -g 4444 curators
++ sudo useradd -m -u 5501 -s /bin/bash -G developers user1
++ sudo useradd -m -u 5502 -s /bin/bash -G developers user2
++ sudo useradd -m -u 5503 -s /bin/bash -G developers user3
++ sudo useradd -m -s /bin/bash -G curators curator1
++ sudo useradd -m -s /bin/bash -G curators curator2
++ sudo install -d -m 0755 /data
++ sudo install -d -m 2770 -o root -g developers /data/mephi-2026
++ sudo setfacl -m u::rwx,g::rwx,g:curators:r-x,m::rwx,o::--- /data/mephi-2026
++ sudo setfacl -d -m u::rwx,g::rwx,g:curators:r-x,m::rwx,o::--- /data/mephi-2026
++ getfacl -p /data/mephi-2026
+# file: /data/mephi-2026
+# owner: root
+# group: developers
+# flags: -s-
+user::rwx
+group::rwx
+group:curators:r-x
+mask::rwx
+other::---
+default:user::rwx
+default:group::rwx
+default:group:curators:r-x
+default:mask::rwx
+default:other::---
+
++ for account in user1 user2 user3 curator1 curator2
++ id user1
+uid=5501(user1) gid=5501(user1) groups=5501(user1),1001(developers)
++ for account in user1 user2 user3 curator1 curator2
++ id user2
+uid=5502(user2) gid=5502(user2) groups=5502(user2),1001(developers)
++ for account in user1 user2 user3 curator1 curator2
++ id user3
+uid=5503(user3) gid=5503(user3) groups=5503(user3),1001(developers)
++ for account in user1 user2 user3 curator1 curator2
++ id curator1
+uid=5504(curator1) gid=5504(curator1) groups=5504(curator1),4444(curators)
++ for account in user1 user2 user3 curator1 curator2
++ id curator2
+uid=5505(curator2) gid=5505(curator2) groups=5505(curator2),4444(curators)

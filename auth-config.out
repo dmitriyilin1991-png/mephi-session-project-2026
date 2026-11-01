@@ -1,0 +1,123 @@
++ sudo cp -a /etc/pam.d/login /root/mephi-backups/pam-login.before
++ sudo cp -a /etc/login.defs /root/mephi-backups/login.defs.before
++ sudo cp -a /etc/security/pwquality.conf /root/mephi-backups/pwquality.conf.before
++ sudo authselect check
+Current configuration is valid.
++ sudo find /etc/security/pwquality.conf.d -type f -maxdepth 1 -print
++ sudo sed -i '/^account.*pam_nologin.so/a account required pam_access.so accessfile=/etc/security/mephi-console-access.conf' /etc/pam.d/login
++ printf '%s\n' '- : (curators) : ALL' '+ : ALL : ALL'
++ sudo tee /etc/security/mephi-console-access.conf
+- : (curators) : ALL
++ : ALL : ALL
++ sudo chmod 0644 /etc/security/mephi-console-access.conf
++ sudo restorecon /etc/pam.d/login /etc/security/mephi-console-access.conf
++ sudo sed -i -E 's/^PASS_MAX_DAYS[[:space:]]+.*/PASS_MAX_DAYS   90/' /etc/login.defs
++ printf '\n# MEPHI session project: at least 12 actual characters\nminlen = 12\ndcredit = 0\nucredit = 0\nlcredit = 0\nocredit = 0\nenforcing = 1\nenforce_for_root\n'
++ sudo tee -a /etc/security/pwquality.conf
+
+# MEPHI session project: at least 12 actual characters
+minlen = 12
+dcredit = 0
+ucredit = 0
+lcredit = 0
+ocredit = 0
+enforcing = 1
+enforce_for_root
++ for account in user1 user2 user3 curator1 curator2 labadmin root
++ sudo chage -M 90 user1
++ sudo chage -l user1
+Last password change					: Oct 31, 2026
+Password expires					: Jan 29, 2027
+Password inactive					: never
+Account expires						: never
+Minimum number of days between password change		: 0
+Maximum number of days between password change		: 90
+Number of days of warning before password expires	: 7
++ for account in user1 user2 user3 curator1 curator2 labadmin root
++ sudo chage -M 90 user2
++ sudo chage -l user2
+Last password change					: Oct 31, 2026
+Password expires					: Jan 29, 2027
+Password inactive					: never
+Account expires						: never
+Minimum number of days between password change		: 0
+Maximum number of days between password change		: 90
+Number of days of warning before password expires	: 7
++ for account in user1 user2 user3 curator1 curator2 labadmin root
++ sudo chage -M 90 user3
++ sudo chage -l user3
+Last password change					: Oct 31, 2026
+Password expires					: Jan 29, 2027
+Password inactive					: never
+Account expires						: never
+Minimum number of days between password change		: 0
+Maximum number of days between password change		: 90
+Number of days of warning before password expires	: 7
++ for account in user1 user2 user3 curator1 curator2 labadmin root
++ sudo chage -M 90 curator1
++ sudo chage -l curator1
+Last password change					: Oct 31, 2026
+Password expires					: Jan 29, 2027
+Password inactive					: never
+Account expires						: never
+Minimum number of days between password change		: 0
+Maximum number of days between password change		: 90
+Number of days of warning before password expires	: 7
++ for account in user1 user2 user3 curator1 curator2 labadmin root
++ sudo chage -M 90 curator2
++ sudo chage -l curator2
+Last password change					: Oct 31, 2026
+Password expires					: Jan 29, 2027
+Password inactive					: never
+Account expires						: never
+Minimum number of days between password change		: 0
+Maximum number of days between password change		: 90
+Number of days of warning before password expires	: 7
++ for account in user1 user2 user3 curator1 curator2 labadmin root
++ sudo chage -M 90 labadmin
++ sudo chage -l labadmin
+Last password change					: never
+Password expires					: never
+Password inactive					: never
+Account expires						: never
+Minimum number of days between password change		: 0
+Maximum number of days between password change		: 90
+Number of days of warning before password expires	: 7
++ for account in user1 user2 user3 curator1 curator2 labadmin root
++ sudo chage -M 90 root
++ sudo chage -l root
+Last password change					: never
+Password expires					: never
+Password inactive					: never
+Account expires						: never
+Minimum number of days between password change		: 0
+Maximum number of days between password change		: 90
+Number of days of warning before password expires	: 7
++ sudo authselect check
+Current configuration is valid.
++ sudo cat /etc/pam.d/login
+#%PAM-1.0
+auth       substack     system-auth
+auth       include      postlogin
+account    required     pam_nologin.so
+account required pam_access.so accessfile=/etc/security/mephi-console-access.conf
+account    include      system-auth
+password   include      system-auth
+# pam_selinux.so close should be the first session rule
+session    required     pam_selinux.so close
+session    required     pam_loginuid.so
+# pam_selinux.so open should only be followed by sessions to be executed in the user context
+session    required     pam_selinux.so open
+session    required     pam_namespace.so
+session    optional     pam_keyinit.so force revoke
+session    include      system-auth
+session    include      postlogin
+-session   optional     pam_ck_connector.so
++ sudo grep -E '^[^#[:space:]]' /etc/security/pwquality.conf
+minlen = 12
+dcredit = 0
+ucredit = 0
+lcredit = 0
+ocredit = 0
+enforcing = 1
+enforce_for_root

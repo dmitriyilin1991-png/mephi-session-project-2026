@@ -1,0 +1,15 @@
+Current-boot PAM evidence:
+Nov 01 15:04:30 mephi-2026.domain.local python3[1429]: pam_access(login:account): access denied for user `curator1' from `tty8'
+Nov 01 15:04:30 mephi-2026.domain.local python3[1429]: pam_access(login:account): access denied for user `curator2' from `tty8'
+SELinux context verification (no changes):
+/mephi-web verified.
+/mephi-web/index.html verified.
+Package consistency:
+Package verification for chage:
+shadow-utils-4.13-2.red80.x86_64
+S.5....T.  c /etc/login.defs
+Root remains locked:
+root LK 1969-12-31 0 90 7 -1 (Password locked.)
+Failed system services:
+  UNIT LOAD ACTIVE SUB DESCRIPTION
+0 loaded units listed.

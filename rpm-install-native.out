@@ -1,0 +1,38 @@
++ rpm -K /tmp/mephi-rpm/tcpdump-4.99.5-1.red80.x86_64.rpm
+/tmp/mephi-rpm/tcpdump-4.99.5-1.red80.x86_64.rpm: digests signatures OK
++ sudo rpm -Uvh --replacepkgs /tmp/mephi-rpm/tcpdump-4.99.5-1.red80.x86_64.rpm
+Verifying...                          ########################################
+Preparing...                          ########################################
+Updating / installing...
+tcpdump-14:4.99.5-1.red80             ########################################
+Cleaning up / removing...
+tcpdump-14:4.99.5-1.red80             ########################################
++++ command -v tcpdump
+++ readlink -f /usr/sbin/tcpdump
++ path=/usr/sbin/tcpdump
++ sudo chmod u-s /usr/sbin/tcpdump
++ sudo setcap cap_net_raw,cap_net_admin=ep /usr/sbin/tcpdump
++ getcap /usr/sbin/tcpdump
+/usr/sbin/tcpdump cap_net_admin,cap_net_raw=ep
++ capture=2344
++ sleep 2
++ sudo -u user1 timeout 15s tcpdump -i lo -nn -c 2 icmp
++ ping -c 2 127.0.0.1
+PING 127.0.0.1 (127.0.0.1) 56(84) bytes of data.
+64 bytes from 127.0.0.1: icmp_seq=1 ttl=64 time=0.021 ms
+64 bytes from 127.0.0.1: icmp_seq=2 ttl=64 time=0.034 ms
+
+--- 127.0.0.1 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1050ms
+rtt min/avg/max/mdev = 0.021/0.027/0.034/0.006 ms
++ wait 2344
++ cat /home/labadmin/mephi-session-project-2026/tcpdump-test.out
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on lo, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+15:00:17.072205 IP 127.0.0.1 > 127.0.0.1: ICMP echo request, id 1, seq 1, length 64
+15:00:17.072211 IP 127.0.0.1 > 127.0.0.1: ICMP echo reply, id 1, seq 1, length 64
+2 packets captured
+4 packets received by filter
+0 packets dropped by kernel
++ sudo dnf '--disablerepo=*' --enablerepo=base --enablerepo=updates -q list --available fbgrab
+Error: No matching Packages to list

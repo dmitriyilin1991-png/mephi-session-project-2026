@@ -1,0 +1,27 @@
+    1  export LANG=C LC_ALL=C SYSTEMD_PAGER=cat PAGER=cat
+    2  export HISTSIZE=20000 HISTFILESIZE=30000
+    3  shopt -s histappend
+    4  set -o pipefail
+    5  mkdir -p ~/mephi-session-project-2026
+    6  sudo -n true
+    7  udo lslocks
+    8  PS1='labadmin$ '; systemctl status 1558 --no-pager; ps -eo pid,ppid,etime,stat,comm,args | grep -E 'dnf|rpm|packagekit|yumex' | grep -v grep; sudo tail -n 15 /var/log/dnf.log; systemctl get-default; systemctl status display-manager --no-pager
+    9  sudo -v
+   10  cat /etc/os-release
+   11  hostnamectl
+   12  ip -4 -br addr
+   13  ip route
+   14  sudo dnf install -y openssh-server sudo
+   15  sudo systemctl start sshd
+   16  systemctl is-active sshd
+   17  ip -4 -br addr
+   18  sudo ssh-keygen -lf /ect/ssh/ssh_host_ecdsa_key.pub
+   19  sudo ssh-keygen -lf /etc/ssh/ssh_host_ecdsa_key.pub
+   20  mkdir -p ~/.ssh
+   21  chmod 700 ~/.ssh
+   22  printf '%s\n' 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPwA4jQJ45qVkz01O4/UeWSR27DveaCGpGhCGYHfjg3u codex-redos-lab-2026' >> ~/.ssh/authorized_keys
+   23  chmod 600 ~/.ssh/authorized_keys
+   24  sudo restorecon -RFv ~/.ssh
+   25  printf '%s\n' 'labadmin ALL=(ALL) NOPASSWD: ALL' | sudo tee /etc/sudoers.d/labadmin-codex
+   26  sudo chmod 0440 /etc/sudoers.d/labadmin-codex
+   27  sudo visudo -c

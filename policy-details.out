@@ -1,0 +1,21 @@
+Account: user1
+Account: user2
+Account: user3
+Account: curator1
+Account: curator2
+Account: labadmin
+Account: root
+root: last_change= min_days=0 max_days=90 warn_days=7
+labadmin: last_change=20757 min_days=0 max_days=90 warn_days=7
+user1: last_change=20758 min_days=0 max_days=90 warn_days=7
+user2: last_change=20757 min_days=0 max_days=90 warn_days=7
+user3: last_change=20757 min_days=0 max_days=90 warn_days=7
+curator1: last_change=20757 min_days=0 max_days=90 warn_days=7
+curator2: last_change=20757 min_days=0 max_days=90 warn_days=7
+Configured PAM pwquality:
+password    requisite                                    pam_pwquality.so
+GUI package check:
+package sddm is not installed
+package plasma-workspace is not installed
+package xorg-x11-server-Xorg is not installed
+package xorg-x11-server-Xwayland is not installed

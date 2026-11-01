@@ -1,0 +1,26 @@
++ id user1
+uid=5501(user1) gid=5501(user1) группы=5501(user1),1001(developers)
++ getcap /usr/sbin/tcpdump
+/usr/sbin/tcpdump cap_net_admin,cap_net_raw=ep
++ test '!' -u /usr/sbin/tcpdump
++ capture=1670
++ sleep 2
++ sudo -u user1 timeout 15s /usr/sbin/tcpdump -i lo -nn -c 2 icmp
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on lo, link-type EN10MB (Ethernet), snapshot length 262144 bytes
++ ping -c 2 127.0.0.1
+PING 127.0.0.1 (127.0.0.1) 56(84) bytes of data.
+64 bytes from 127.0.0.1: icmp_seq=1 ttl=64 time=0.024 ms
+15:04:48.827420 IP 127.0.0.1 > 127.0.0.1: ICMP echo request, id 2, seq 1, length 64
+15:04:48.827427 IP 127.0.0.1 > 127.0.0.1: ICMP echo reply, id 2, seq 1, length 64
+2 packets captured
+4 packets received by filter
+0 packets dropped by kernel
+64 bytes from 127.0.0.1: icmp_seq=2 ttl=64 time=0.056 ms
+
+--- 127.0.0.1 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1069ms
+rtt min/avg/max/mdev = 0.024/0.040/0.056/0.016 ms
++ wait 1670
++ printf 'PASS non-root capture after reboot; no SUID\n'
+PASS non-root capture after reboot; no SUID

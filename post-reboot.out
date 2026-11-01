@@ -1,0 +1,72 @@
+2026-11-01T15:04:39+08:00
+NAME="RED OS"
+VERSION="8.0.3"
+PLATFORM_ID="platform:red80"
+ID="redos"
+ID_LIKE="rhel centos fedora"
+VERSION_ID="8.0.3"
+PRETTY_NAME="RED OS 8.0.3 (Standard Desktop)"
+ANSI_COLOR="0;31"
+CPE_NAME="cpe:/o:redos:redos:8"
+HOME_URL="https://redos.red-soft.ru"
+BUG_REPORT_URL="https://support.red-soft.ru"
+EDITION="Standard"
+
+6.12.101-1.red80.x86_64
+mephi-2026.domain.local
+connection.id:                          enp0s3
+connection.autoconnect:                 yes
+ipv4.method:                            auto
+multi-user.target
+TARGET     SOURCE    FSTYPE OPTIONS
+/mephi-web /dev/sdb1 ext4   rw,relatime,seclabel
+NAME   FSTYPE  FSVER            LABEL           UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+sda                                                                                                 
+|-sda1                                                                                              
+|-sda2 ext4    1.0                              af6a1b7d-371a-448b-bc70-fc84b3c32b07  615.3M    30% /boot
+|-sda3 swap    1                                901dbe90-5cab-41e3-94fa-dbfd43febcd6                [SWAP]
+`-sda4 ext4    1.0                              bccc338e-9377-4ae2-bd81-db5f3c87f222   21.6G    32% /
+sdb                                                                                                 
+`-sdb1 ext4    1.0              MEPHI_WEB       d02d8044-7ced-403a-91be-5363cff07ea1    7.4G     0% /mephi-web
+sr0    iso9660 Joliet Extension VBox_GAs_7.0.10 2023-07-12-19-24-46-08                              
+zram0                                                                                               [SWAP]
+enabled
+enabled
+active
+active
+RequiresMountsFor=/var/tmp /mephi-web
+Enforcing
+system_u:object_r:httpd_sys_content_t:s0 /mephi-web
+system_u:object_r:httpd_sys_content_t:s0 /mephi-web/index.html
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+Hello from Student: 372396
+/usr/sbin/tcpdump cap_net_admin,cap_net_raw=ep
+755 root /usr/sbin/tcpdump
+uid=5501(user1) gid=5501(user1) groups=5501(user1),1001(developers)
+uid=5502(user2) gid=5502(user2) groups=5502(user2),1001(developers)
+uid=5503(user3) gid=5503(user3) groups=5503(user3),1001(developers)
+uid=5504(curator1) gid=5504(curator1) groups=5504(curator1),4444(curators)
+uid=5505(curator2) gid=5505(curator2) groups=5505(curator2),4444(curators)
+uid=1000(labadmin) gid=1000(labadmin) groups=1000(labadmin),10(wheel)
+Current configuration is valid.
+/
+   [ ] target exists
+   [ ] UUID=bccc338e-9377-4ae2-bd81-db5f3c87f222 translated to /dev/sda4
+   [ ] source /dev/sda4 exists
+   [ ] FS type is ext4
+/boot
+   [ ] target exists
+   [ ] UUID=af6a1b7d-371a-448b-bc70-fc84b3c32b07 translated to /dev/sda2
+   [ ] source /dev/sda2 exists
+   [ ] FS type is ext4
+none
+   [ ] UUID=901dbe90-5cab-41e3-94fa-dbfd43febcd6 translated to /dev/sda3
+   [ ] source /dev/sda3 exists
+   [ ] FS type is swap
+/mephi-web
+   [ ] target exists
+   [ ] LABEL=MEPHI_WEB translated to /dev/sdb1
+   [ ] source /dev/sdb1 exists
+   [ ] FS type is ext4
+Success, no errors or warnings detected

@@ -1,0 +1,6 @@
+/etc/sudoers: parsed OK
+/etc/sudoers.d/labadmin-codex: parsed OK
+/etc/sudoers: parsed OK
+PASS temporary NOPASSWD rule removed; sudo now requires password.
+uid=1000(labadmin) gid=1000(labadmin) groups=1000(labadmin),10(wheel) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
+SSH key access retained; labadmin remains in wheel.
