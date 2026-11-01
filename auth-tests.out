@@ -1,6 +1,0 @@
-PASS user1: correct password accepted; login account result=0 (allowed)
-PASS user2: correct password accepted; login account result=0 (allowed)
-PASS user3: correct password accepted; login account result=0 (allowed)
-PASS curator1: correct password accepted; login account result=6 (permission denied)
-PASS curator2: correct password accepted; login account result=6 (permission denied)
-All login PAM checks passed. PAM_TTY=tty8; this test does not open a shell.

@@ -1,6 +1,0 @@
-ноя 01 14:52:22 mephi-2026.domain.local login[1251]: pam_access(login:account): access denied for user `curator1' from `pts/0'
-ноя 01 14:52:22 mephi-2026.domain.local login[1255]: pam_access(login:account): access denied for user `curator2' from `pts/0'
-ноя 01 14:55:01 mephi-2026.domain.local login[1699]: pam_access(login:account): access denied for user `curator1' from `pts/0'
-ноя 01 14:55:03 mephi-2026.domain.local login[1703]: pam_access(login:account): access denied for user `curator2' from `pts/0'
-ноя 01 14:59:53 mephi-2026.domain.local python3[2236]: pam_access(login:account): access denied for user `curator1' from `tty8'
-ноя 01 14:59:53 mephi-2026.domain.local python3[2236]: pam_access(login:account): access denied for user `curator2' from `tty8'

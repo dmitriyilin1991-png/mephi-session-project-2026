@@ -1,7 +1,0 @@
-SELinux fcontext                                   type               Context
-
-/mephi-web(/.*)?                                   all files          system_u:object_r:httpd_sys_content_t:s0 
-/usr/lib/chrome-sandbox                            all files          system_u:object_r:chrome_sandbox_exec_t:s0 
-/usr/lib/chromium-browser                          all files          system_u:object_r:bin_t:s0 
-/usr/lib/chromium-browser/chromium-browser.sh      all files          system_u:object_r:bin_t:s0 
-/usr/share/dnfdaemon/dnfdaemon-system              all files          system_u:object_r:rpm_exec_t:s0 
